@@ -1,0 +1,53 @@
+menu "WiFi Configuration"
+
+config WIFI_SSID
+    string "WiFi SSID"
+	default "DEFCON Open"
+	help
+		SSID (network name) to connect to.
+
+config WIFI_PASSWORD
+    string "WiFi Password"
+	default ""
+	help
+		WiFi password (WPA or WPA2) to use.
+
+		Can be left blank if the network has no security set.
+
+endmenu
+
+menu "Board Configuration"
+
+choice BOARD_VERSION
+	prompt "Board version"
+	default BOARD_VERSION_V3
+	help
+		Selects which board revision to target. 
+		The following versions exist:
+		
+		- V1: 
+			 - Initial prototype.
+			 - Silver pads.
+			 - Audio input does not work.
+			 - SD card does not work.
+			 - Accelerometer does not work.
+			 
+		- V2:
+			- Second prototype.
+			- Gold pads.
+			- Accelerometer does not work.
+			
+		- V3:
+			- Production version.
+			- Gold pads.
+			- Puzzle elements on back.
+			
+config BOARD_VERSION_V1
+	bool "V1"
+config BOARD_VERSION_V2
+	bool "V2"
+config BOARD_VERSION_V3
+	bool "V3"
+endchoice
+
+endmenu

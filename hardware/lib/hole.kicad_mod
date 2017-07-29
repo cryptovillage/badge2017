@@ -1,0 +1,9 @@
+(module CV:hole (layer F.Cu) (tedit 55A2CCE8)
+  (fp_text reference hole_l (at -0.78 1.33) (layer F.SilkS) hide
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (fp_text value hole (at -0.32 -3.05) (layer F.Fab)
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (pad 1 thru_hole circle (at -0.42 -1.2) (size 4 4) (drill 3) (layers *.Cu *.Mask F.SilkS))
+)

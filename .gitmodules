@@ -1,0 +1,15 @@
+[submodule "firmware/esp-idf"]
+	path = firmware/esp-idf
+	url = https://github.com/espressif/esp-idf.git
+[submodule "firmware/esp32/components/u8g2/u8g2"]
+	path = firmware/esp32/components/u8g2/u8g2
+	url = https://github.com/olikraus/u8g2.git
+[submodule "firmware/esp32-test/components/u8g2/u8g2"]
+	path = firmware/esp32-test/components/u8g2/u8g2
+	url = https://github.com/olikraus/u8g2.git
+[submodule "firmware/esp32/components/micropython/micropython-esp32"]
+	path = firmware/esp32/components/micropython/micropython-esp32
+	url = git@github.com:jjculber/micropython-esp32.git
+[submodule "firmware/esp32/components/micropython/micropython-lib"]
+	path = firmware/esp32/components/micropython/micropython-lib
+	url = https://github.com/micropython/micropython-lib.git
