@@ -13,7 +13,7 @@ To build and flash firmware:
 
 `cd firmware/esp32`
 
-`make`
+`make` or download prebuilt firmware from: https://2017.badge.cryptovillage.org/firmware/v0.9/
 
 `make flash` OR
 
@@ -27,9 +27,13 @@ edit config with (includes wifi creds):
 
 SD Card contents can be found: https://2017.badge.cryptovillage.org/sdcard/0.3-prerel.zip
 
-Download prebuilt firmware from: https://2017.badge.cryptovillage.org/firmware/v0.9/
-
 If your device is showing "TEST MODE", the EFM8 needs to be flashed. We've found that this only works from a Windows computer or Virtualbox with the Extension Pack for USB devices. If using a VM, we found that the IE11 Win7 testing VM from MicroSoft worked. You will need to install the driver from: https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers
+
+Download the flashing tools here: https://2017.badge.cryptovillage.org/W18779AXC7/TestFlash.zip
+
+The prebuilt firmware can be found here: https://2017.badge.cryptovillage.org/firmware/v0.9/
+
+You need to replace esp32test.bin with cpv2017.bin, and partitions_singleapp.bin with partitions.bin in TestFlash after unzipping. (Keeping the original filenames from TestFlash.zip contents but replacing the file content)
 
 Hold down the knob when plugging the device in to put the device into a mode to flash the EFM8. The LEDs should not turn on and the screen will be blank and dim.
 
