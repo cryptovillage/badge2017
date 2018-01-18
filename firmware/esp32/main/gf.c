@@ -87,7 +87,7 @@ void gf_getRandom(uint8_t* rand, size_t len)
 {
 	int i;
 
-	// TODO: save three bytes from esp_random() to avoid exhasting entropy?
+	// TODO: save three bytes from esp_random() to avoid exhausting entropy?
 	for (i = 0; i < len; i++) {
 		rand[i] = esp_random() & 0xff;
 	}

@@ -185,7 +185,7 @@ STATIC mp_obj_t badge_gf_computeShards(mp_obj_t key_obj, mp_obj_t threshold_obj,
 	raw_shards = alloca(sizeof(uint8_t *) * num_shards);
 	for (i = 0; i < num_shards; i++) {
 		raw_shards[i] = m_new(byte, key_buf_info.len);
-		shards[i] = mp_obj_new_bytearray_by_ref(num_shards, raw_shards[i]);
+		shards[i] = mp_obj_new_bytearray_by_ref(key_buf_info.len, raw_shards[i]);
 	}
 	shardList = mp_obj_new_list(num_shards, shards);
 	gf_computeShards((uint8_t *)key_buf_info.buf, key_buf_info.len, raw_shards, threshold, num_shards);
@@ -196,19 +196,28 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_3(badge_gf_computeShards_obj, badge_gf_computeSha
 
 STATIC mp_obj_t badge_gf_computeCombine(mp_obj_t shares_x_obj, mp_obj_t shards_obj)
 {
-	mp_buffer_info_t shares_x_info;
 	mp_buffer_info_t shard_buf_info;
+	//mp_buffer_info_t shares_x_info;
 	size_t shard_len = 0;
+	size_t num_x_coords = 0;
 	size_t num_shards = 0;
+	mp_obj_t *x_coords;
 	mp_obj_t *shards;
 	uint8_t** raw_shards = NULL;
 	uint8_t* out = NULL;
+	uint8_t* x_coords_buf = NULL;
 	size_t i;
 
-	mp_get_buffer_raise(shares_x_obj, &shares_x_info, MP_BUFFER_READ);
+	//mp_get_buffer_raise(shares_x_obj, &shares_x_info, MP_BUFFER_READ);
+	mp_obj_get_array(shares_x_obj, &num_x_coords, &x_coords);
 	mp_obj_get_array(shards_obj, &num_shards, &shards);
-	if (shares_x_info.len != num_shards) {
+	if (num_x_coords != num_shards) {
 		mp_raise_ValueError("x coordinate list and shard list must be the same length");
+	}
+
+	x_coords_buf = alloca(num_x_coords);
+	for (i = 0; i < num_x_coords; i++) {
+		x_coords_buf[i] = mp_obj_get_int(x_coords[i]);
 	}
 
 	for (i = 0; i < num_shards; i++) {
@@ -224,7 +233,7 @@ STATIC mp_obj_t badge_gf_computeCombine(mp_obj_t shares_x_obj, mp_obj_t shards_o
 		}
 		raw_shards[i] = (uint8_t *)shard_buf_info.buf;
 	}
-	gf_computeCombine(shares_x_info.buf, raw_shards, num_shards, shard_len, out);
+	gf_computeCombine(x_coords_buf, raw_shards, num_shards, shard_len, out);
 	return mp_obj_new_bytearray(shard_len, out);
 }
 
