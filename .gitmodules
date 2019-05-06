@@ -9,7 +9,7 @@
 	url = https://github.com/olikraus/u8g2.git
 [submodule "firmware/esp32/components/micropython/micropython-esp32"]
 	path = firmware/esp32/components/micropython/micropython-esp32
-	url = git@github.com:cryptovillage/micropython.git
+	url = https://github.com/cryptovillage/micropython.git
 [submodule "firmware/esp32/components/micropython/micropython-lib"]
 	path = firmware/esp32/components/micropython/micropython-lib
 	url = https://github.com/micropython/micropython-lib.git
