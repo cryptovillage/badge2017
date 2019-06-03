@@ -130,7 +130,7 @@ STATIC mp_obj_t listdir_next(mp_obj_t self_in) {
     }
 
     mp_obj_tuple_t *t = MP_OBJ_TO_PTR(mp_obj_new_tuple(3, NULL));
-    t->items[0] = mp_obj_new_str(dirent->d_name, strlen(dirent->d_name), false);
+    t->items[0] = mp_obj_new_str(dirent->d_name, strlen(dirent->d_name));
     #ifdef _DIRENT_HAVE_D_TYPE
     t->items[1] = MP_OBJ_NEW_SMALL_INT(dirent->d_type);
     #else

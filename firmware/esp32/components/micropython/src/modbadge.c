@@ -242,14 +242,14 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_2(badge_gf_computeCombine_obj, badge_gf_computeCo
 // TODO: Make this a QSTR in flash
 STATIC mp_obj_t badge_get_esp_idf_version()
 {
-	return mp_obj_new_str(IDF_VER, strlen(IDF_VER), false);
+	return mp_obj_new_str(IDF_VER, strlen(IDF_VER));
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_0(badge_get_esp_idf_version_obj, badge_get_esp_idf_version);
 
 STATIC mp_obj_t badge_get_app_version()
 {
 	const char* verStr = get_app_version_str();
-	return mp_obj_new_str(verStr, strlen(verStr), false);
+	return mp_obj_new_str(verStr, strlen(verStr));
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_0(badge_get_app_version_obj, badge_get_app_version);
 

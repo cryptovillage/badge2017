@@ -34,7 +34,6 @@
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "freertos/heap_regions.h"
 #include "esp_system.h"
 #include "esp_heap_alloc_caps.h"
 #include "esp_log.h"
@@ -78,7 +77,7 @@ void mp_task(void *pvParameter) {
     // TODO(supersat): Are these the right caps?
     // TODO(supersat): Move to new heap API
     // TODO(supersat): Move to a dynamic heap?! That would require a lot of work.
-    mp_task_heap = pvPortMallocCaps(MP_TASK_HEAP_SIZE, MALLOC_CAP_8BIT);
+    mp_task_heap = heap_caps_malloc(MP_TASK_HEAP_SIZE, MALLOC_CAP_8BIT);
     if (!mp_task_heap) {
     	ESP_LOGW(TAG, "Cannot allocate %d bytes for the MicroPython heap", MP_TASK_HEAP_SIZE);
     	return;

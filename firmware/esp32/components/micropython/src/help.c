@@ -1,6 +1,6 @@
 #include "py/builtin.h"
 
-const char *esp32_help_text =
+const char esp32_help_text[] =
 "Welcome to MicroPython on the 2017 Crypto and Privacy Village Badge!\n"
 "\n"
 "For generic MicroPython docs please visit https://docs.micropython.org/\n"

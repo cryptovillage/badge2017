@@ -2,7 +2,7 @@
 # Component Makefile
 #
 
-REL_PY_SRC = micropython-esp32/py
+REL_PY_SRC = micropython/py
 ABS_PY_SRC = $(COMPONENT_PATH)/$(REL_PY_SRC)
 HEADER_BUILD = $(COMPONENT_PATH)/inc/genhdr
 GENSRC_BUILD = $(COMPONENT_PATH)/src/gensrc
@@ -14,10 +14,10 @@ CFLAGS += -DN_XTENSA -O3
 COMPONENT_EXTRA_CLEAN = inc/genhdr/*.h src/gensrc/*.c
 
 COMPONENT_ADD_INCLUDEDIRS := inc
-COMPONENT_PRIV_INCLUDEDIRS := inc micropython-esp32 micropython-esp32/lib/utils micropython-esp32/lib/mp-readline micropython-esp32/lib/netutils
-#micropython-esp32 micropython-esp32/esp32 micropython-esp32/lib/mp-readline micropython-esp32/lib/netutils micropython-esp32/lib/timeutils micropython-esp32/extmod
+COMPONENT_PRIV_INCLUDEDIRS := inc micropython micropython/lib/utils micropython/lib/mp-readline micropython/lib/netutils
+#micropython micropython/esp32 micropython/lib/mp-readline micropython/lib/netutils micropython/lib/timeutils micropython/extmod
 
-COMPONENT_SRCDIRS := src src/gensrc $(REL_PY_SRC) micropython-esp32/lib/utils micropython-esp32/lib/mp-readline micropython-esp32/lib/netutils micropython-esp32/extmod
+COMPONENT_SRCDIRS := src src/gensrc $(REL_PY_SRC) micropython/lib/utils micropython/lib/mp-readline micropython/lib/netutils micropython/extmod
 COMPONENT_OBJS := src/help.o \
 	src/file.o \
 	src/mpthreadport.o \
@@ -44,7 +44,7 @@ COMPONENT_OBJS := src/help.o \
 	$(REL_PY_SRC)/asmbase.o \
 	$(REL_PY_SRC)/stream.o \
 	$(REL_PY_SRC)/builtinimport.o \
-	$(REL_PY_SRC)/emitnative.o \
+	$(REL_PY_SRC)/emitnxtensa.o \
 	$(REL_PY_SRC)/runtime_utils.o \
 	$(REL_PY_SRC)/malloc.o \
 	$(REL_PY_SRC)/obj.o \
@@ -55,20 +55,16 @@ COMPONENT_OBJS := src/help.o \
 	$(REL_PY_SRC)/objzip.o \
 	$(REL_PY_SRC)/binary.o \
 	$(REL_PY_SRC)/objbool.o \
-	$(REL_PY_SRC)/asmarm.o \
-	$(REL_PY_SRC)/asmx64.o \
 	$(REL_PY_SRC)/emitbc.o \
 	$(REL_PY_SRC)/moduerrno.o \
 	$(REL_PY_SRC)/mpz.o \
 	$(REL_PY_SRC)/opmethods.o \
 	$(REL_PY_SRC)/warning.o \
 	$(REL_PY_SRC)/objreversed.o \
-	$(REL_PY_SRC)/nlrx64.o \
 	$(REL_PY_SRC)/objnone.o \
 	$(REL_PY_SRC)/objgetitemiter.o \
 	$(REL_PY_SRC)/nlrsetjmp.o \
 	$(REL_PY_SRC)/objexcept.o \
-	$(REL_PY_SRC)/nlrthumb.o \
 	$(REL_PY_SRC)/modio.o \
 	$(REL_PY_SRC)/qstr.o \
 	$(REL_PY_SRC)/parse.o \
@@ -84,7 +80,7 @@ COMPONENT_OBJS := src/help.o \
 	$(REL_PY_SRC)/objtuple.o \
 	$(REL_PY_SRC)/objmodule.o \
 	$(REL_PY_SRC)/reader.o \
-	$(REL_PY_SRC)/nlrx86.o \
+	$(REL_PY_SRC)/nlr.o \
 	$(REL_PY_SRC)/bc.o \
 	$(REL_PY_SRC)/objslice.o \
 	$(REL_PY_SRC)/unicode.o \
@@ -123,7 +119,6 @@ COMPONENT_OBJS := src/help.o \
 	$(REL_PY_SRC)/objstrunicode.o \
 	$(REL_PY_SRC)/nlrxtensa.o \
 	$(REL_PY_SRC)/scope.o \
-	$(REL_PY_SRC)/asmx86.o \
 	$(REL_PY_SRC)/objint_mpz.o \
 	$(REL_PY_SRC)/builtinhelp.o \
 	$(REL_PY_SRC)/objstr.o \
@@ -139,26 +134,26 @@ COMPONENT_OBJS := src/help.o \
 	$(REL_PY_SRC)/modgc.o \
 	$(REL_PY_SRC)/objfloat.o \
 	$(REL_PY_SRC)/objrange.o \
-	micropython-esp32/lib/utils/interrupt_char.o \
-	micropython-esp32/lib/utils/printf.o \
-	micropython-esp32/lib/utils/pyexec.o \
-	micropython-esp32/lib/utils/stdout_helpers.o \
-	micropython-esp32/lib/mp-readline/readline.o \
-	micropython-esp32/lib/netutils/netutils.o \
-	micropython-esp32/extmod/modframebuf.o \
-	micropython-esp32/extmod/modubinascii.o \
-	micropython-esp32/extmod/moductypes.o \
-	micropython-esp32/extmod/moduheapq.o \
-	micropython-esp32/extmod/modujson.o \
-	micropython-esp32/extmod/modure.o \
-	micropython-esp32/extmod/modurandom.o \
-	micropython-esp32/extmod/moduselect.o \
-	micropython-esp32/extmod/modussl_mbedtls.o \
-	micropython-esp32/extmod/moduzlib.o \
-	micropython-esp32/extmod/modwebsocket.o \
-	micropython-esp32/extmod/modwebrepl.o \
-	micropython-esp32/extmod/uos_dupterm.o \
-	micropython-esp32/extmod/utime_mphal.o
+	micropython/lib/utils/interrupt_char.o \
+	micropython/lib/utils/printf.o \
+	micropython/lib/utils/pyexec.o \
+	micropython/lib/utils/stdout_helpers.o \
+	micropython/lib/mp-readline/readline.o \
+	micropython/lib/netutils/netutils.o \
+	micropython/extmod/modframebuf.o \
+	micropython/extmod/modubinascii.o \
+	micropython/extmod/moductypes.o \
+	micropython/extmod/moduheapq.o \
+	micropython/extmod/modujson.o \
+	micropython/extmod/modure.o \
+	micropython/extmod/modurandom.o \
+	micropython/extmod/moduselect.o \
+	micropython/extmod/modussl_mbedtls.o \
+	micropython/extmod/moduzlib.o \
+	micropython/extmod/modwebsocket.o \
+	micropython/extmod/modwebrepl.o \
+	micropython/extmod/uos_dupterm.o \
+	micropython/extmod/utime_mphal.o
 	
 # QSTR shenanigans below this line
 
@@ -178,7 +173,7 @@ PYTHON ?= python
 CPP ?= $(CC) -E
 MAKE ?= make
 
-TOP = $(COMPONENT_PATH)/micropython-esp32
+TOP = $(COMPONENT_PATH)/micropython
 MAKE_FROZEN = $(TOP)/tools/make-frozen.py
 MPY_CROSS = $(TOP)/mpy-cross/mpy-cross
 MPY_TOOL = $(TOP)/tools/mpy-tool.py
@@ -232,7 +227,7 @@ endif
 
 ifneq ($(FROZEN_MPY_DIR),)
 # to build the MicroPython cross compiler
-$(TOP)/mpy-cross/mpy-cross: $(TOP)/py/*.[ch] $(TOP)/mpy-cross/*.[ch] $(TOP)/windows/fmode.c
+$(TOP)/mpy-cross/mpy-cross: $(TOP)/py/*.[ch] $(TOP)/mpy-cross/*.[ch] $(TOP)/ports/windows/fmode.c
 	$(MAKE) -C $(TOP)/mpy-cross
 
 # make a list of all the .py files that need compiling and freezing
