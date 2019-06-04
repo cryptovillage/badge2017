@@ -16,6 +16,9 @@ static const char* TAG = "I2C";
 
 #define ACCEL_RATE_100HZ		3
 
+uint8_t i2c_efm8_power_flags = 0;
+uint16_t i2c_efm8_batt_voltage = 0;
+
 static const i2c_config_t i2c_conf_master = {
 	.mode = I2C_MODE_MASTER,
 	.scl_io_num = PIN_I2C_SCL,
@@ -108,6 +111,9 @@ esp_err_t i2c_poll_efm8()
 		e.type = BADGE_EVENT_KNOB_UP;
 		xQueueSendToBack(eventQueue, &e, portMAX_DELAY);
 	}
+
+	i2c_efm8_power_flags = respBuf[2];
+	i2c_efm8_batt_voltage = respBuf[3] | (respBuf[4] << 8);
 
 	return ESP_OK;
 }

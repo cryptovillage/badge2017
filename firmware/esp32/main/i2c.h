@@ -10,6 +10,9 @@
 
 #include "esp_err.h"
 
+extern uint8_t i2c_efm8_power_flags;
+extern uint16_t i2c_efm8_batt_voltage;
+
 extern void i2c_init();
 extern esp_err_t i2c_set_backlight_brightness(uint8_t brightness);
 extern esp_err_t i2c_config_max9723(uint8_t conf);
