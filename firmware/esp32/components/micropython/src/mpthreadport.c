@@ -115,7 +115,7 @@ STATIC void freertos_entry(void *arg) {
     for (;;);
 }
 
-void mp_thread_create_ex(void *(*entry)(void*), void *arg, size_t *stack_size, int priority, char *name) {
+void mp_thread_create_ex(void *(*entry)(void*), void *arg, size_t *stack_size, int priority, const char *name) {
     // store thread entry function into a global variable so we can access it
     ext_thread_entry = entry;
 

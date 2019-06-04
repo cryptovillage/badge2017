@@ -89,11 +89,15 @@ void mp_hal_delay_ms(uint32_t ms) {
             break;
         }
         MICROPY_EVENT_POLL_HOOK
+	    MP_THREAD_GIL_EXIT();
         vTaskDelay(1);
+        MP_THREAD_GIL_ENTER();
     }
     if (dt < ms) {
         // do the remaining delay accurately
+        MP_THREAD_GIL_EXIT();
         ets_delay_us((ms - dt) * 1000);
+        MP_THREAD_GIL_ENTER();
     }
 }
 
