@@ -1,27 +1,32 @@
 # badge2017
 
-To add dependencies (ESP32 SDK, u8g2, MicroPython, etc.):
+To buld the ESP32 firmware:
 
+1. Install the ESP32 toolchain for your OS. You do not need to install the ESP-IDF -- that happens automatically in the$
+  * For Linux: https://esp-idf.readthedocs.io/en/v3.1-beta1/get-started/linux-setup.html
+  * For Windows: https://esp-idf.readthedocs.io/en/v3.1-beta1/get-started/windows-setup.html
+  * For OSX: https://esp-idf.readthedocs.io/en/v3.1-beta1/get-started/macos-setup.html
+
+2. Pull in the ESP-IDF, MicroPython, and other dependencies:
 `git submodule update --init --recursive`
 
-If you need to set up the ESP32 development environment,
-follow step 1: https://esp-idf.readthedocs.io/en/v2.0/linux-setup.html
+3. Build mpy_cross:
+`cd firmware/esp32/components/micropython/micropython/mpy-cross/ && make && cd ../../../..`
 
-`cd components/micropython/micropython-esp32/mpy-cross/ && make clean && make && cd -`
+4. Optionally configure the serial port that your badge appears on (under Serial Flasher Config):
+`make menuconfig`
 
-To build and flash firmware:
+5. Build it:
+`make -j5`
 
-`cd firmware/esp32`
-
-`make` or download prebuilt firmware from: https://2017.badge.cryptovillage.org/firmware/v0.9/
-
+6. Flash it:
 `make flash` OR
 
 `python esptool/esptool.py --chip esp32 --port /dev/ttyUSB0 --baud 115200 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_freq 40m --flash_size detect 0x1000 bootloader.bin 0x10000 cpv2017.bin 0x8000 partitions.bin`
 
 you may need to replace /dev/ttyUSB0 with /dev/ttyACM0 or whatever serial device the badge is listed as.
 
-edit config with (includes wifi creds):
+You can edit the build configuration with (includes wifi creds):
 
 `make menuconfig`
 
